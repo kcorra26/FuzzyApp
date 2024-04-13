@@ -1,5 +1,5 @@
 # Fuzzy Matching App with React Native
-### Working Log
+__Working Log__
 
 ## 4/12 
 ### *Complete*: 
