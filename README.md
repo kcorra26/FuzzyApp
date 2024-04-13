@@ -1,8 +1,8 @@
-# Fuzzy Matching App on React Native
-## Working Log
+# Fuzzy Matching App with React Native
+### Working Log
 
 ## 4/12 
-## Complete: 
+### *Complete*: 
 * planned approach: basic design, algorithm plan, order of approach, priorities
 * wrote distance algorithm for two strings (for fuzzy matching)
 * set up app with Expo, basic front-end search configuration
@@ -10,7 +10,7 @@
 * loaded basic information from dataset to the app (first and last name, then email) using a FlatList
 * first attempt at filtering the data using a basic string check called gettingMatch 
 
-## TODO: 
+### *To Do*: 
 * replace the search matching for fuzzy: incorporate distance algo, decide how to filter (cap for similarity?) 
 * enable scroll on the names that appear
 * test and compare against known fuzzy matching searches
