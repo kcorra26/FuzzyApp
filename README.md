@@ -1,6 +1,7 @@
 # Fuzzy Matching App with React Native
 ## __Overview__
 
+
 *Assignment*: Given the 1000 entries in the attached data set, do fuzzy matching filtering when a user starts typing a name in the search field in a react native app.
 
 The main configuration for the app was written in `App.js`. 
