@@ -3,32 +3,35 @@ __Overview__
 Assignment: Given the 1000 entries in the attached data set, do fuzzy matching filtering when a user starts typing a name in the search field in a react native app.
 
 ### *Efficiency*: 
-***** IF MY OWN ALGO ******
-The gettingDist algorithm determines a basic similarity value between two strings by comparing the similarities of the substrings. Without dynamic programming (which stores the similarity value of each substring), the algorithm would complete in upwards of O(3^n) time. This is extremely inefficient. 
-To avoid a costly runtime, we use a matrix to store the similarity value at each a and b length combination. Because each value is only determined once and can then be extracted in O(1) time from our matrix, gettingDist finishes in O(n*m) time, where n and m are the lengths of strings a and b, respectively. Because this function is called on all of the names in the database, this optimization is crucial for the efficiency of our program.
-
-***** ELSE ******
-With the default Fuse implementation, the search was slow. Fuse.js is used on much larger datasets, so I knew there were ways to optimize the search in order to it to improve. 
-1) slicing the results: 
-2) threshold: 
+With the default Fuse implementation, the search was slow. Fuse.js is used on much larger datasets, so I knew there were ways to optimize the search in order to it to improve. Here's how I made the search faster:
+1) threshold: This determines the similarity score at which Fuse will stop returning the results (where the score is on a scale from 0 to 1). The higher the threshold, the longer it will take for the data to update. The default is 0.6, so to reduce load time I modified it to 0.4. 
+2) slicing the results: For more specific or longer searches, there are fewer results with a score above 0.4. I added a statement that further slices the result size based on the length of the results. This way, even with very common searches (ex. just A), there will be a limited number of results in order to reduce load time. 
 
 ### *Optimization*:
-While Fuse.js is a functional fuzzy matching program, it left significant work to be done to optimize the search for the purpose of the assignment. How I made it better:  
+While Fuse.js is a functional fuzzy matching program, it left significant work to be done to optimize the search for the purpose of the assignment. Here's how I made the results better for our purposes:  
 * The search was failing to rank exact matches (first and last name), and I found it was a result of the separation of the first and last name keys in the json file. To ensure that full names were identified properly, I created a modified json file with a "Full Name" key and passed that to the fuzzy matching algorithm instead. There were significant improvements.
-*  
+* fieldNormWeight: 
 
-How I can make it better: 
-* implement rigorous testing so I can more quatitatively assess the effect of altering different features of the fuse program and my algorithm.
-* experiment with alternative matching libraries and run a script to compare the runtimes of one query. 
-* improve the user interface: adding clickability, loading screen, etc. Front end development was not the focus of the assignment, but it **. 
+### *Further Steps*
+I had a limited amount of time to complete the project. If I had longer to work on it, I would: 
+* Implement rigorous testing so I can more quantitatively assess the effect of altering different features of the fuse program and my algorithm.
+* Optimize search when first and last names are out of order (ex. Li Ryan, Goodman Andrew). There is no specific Fuse documentation that helps with this (matchAllTokens: false should help, but it was not entirely successful), but I could build my own as an addition to the library. 
+* Implement explicit exact matching rules. Sometimes multiple names will return, even when the match is exact for only one of them. I could add a constraint that limits the result to one entry if a search matches just one value. 
+* Experiment with alternative matching libraries and run a script to compare the runtimes of one query. 
+* Improve the user interface: adding clickability, loading screen, etc. Front end development was not the focus of the assignment, but with more time I would explore ways for seamless user interaction.  
 
+__How To Run__
+To run the FuzzyMatch App on your computer, there are two options: 
+1) If an iOS simulator from XCode is installed on your device, clone the git repository in your terminal 
+and run npm start. When prompted to select a view, press i for iOS. Then wait for it to build and use the app from the simulator. 
+2) Expo Go: This app was built with Expo Go. To 
 
 __Working Log__
 
 ## 4/12 
 ### *Complete*: 
 * planned approach: basic design, algorithm plan, order of approach, priorities
-* wrote distance algorithm for two strings (for fuzzy matching)
+* wrote distance algorithm for two strings (for fuzzy matching, in case I was writing my own)
 * set up app with Expo, basic front-end search configuration
 * parsed the csv dataset (used the csv-parser package and ran the default script to save the customer data as a json file in output.json, which I then imported to App.js)
 * loaded basic information from dataset to the app (first and last name, then email) using a FlatList
@@ -41,24 +44,22 @@ __Working Log__
 
 ## 4/13
 ### *Complete*: 
-* replaced basic string comparison function with the dynamic programming algorithm that I wrote yesterday. 
-* enabled scroll, added mapping and sort to order the results by relevance.
-* ran into a few problems: 
-1) just calculating the Levenstein distance between string and query using a threshold (ex. distance is 2) means that the desired name often doesn't show until far into the text (ex 'Andrew' doesn't show up when you've typed 'And' because the distance between the strings is still 3). 
-2) ***
-* experimented with Fuse.js to compare the efficiency of an external library to what I have already written 
+* replaced gettingMatch with the Fuse.js library tool. 
+* enabled scroll, added mapping and sort personal algorithm to order the results by relevance.
 
 ### *To Do*:
-* decide which implementation to use for fuzzy match
-* run test cases (which one works best for our purposes)
+* run test cases, optimize Fuse.js for the given csv file. 
 * add click option (highlight the name that has been clicked)
-* basic improvements to algorithm
 * export and instructions to run
 
 ## 4/14
 ### *Complete*: 
 * Fuse optimization: threshold testing, json modifications, documentation research 
-* Writeup complete
+* Wrote writeup, logged potential improvements
 
 ### *To Do*:
 * export and test
+
+## 4/15 
+### *Complete*: 
+* Final export and code cleanup.

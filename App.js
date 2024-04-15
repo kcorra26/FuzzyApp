@@ -1,21 +1,23 @@
 import { useState } from "react";
 import { StyleSheet, SafeAreaView, TextInput, Text, FlatList, View} from 'react-native';
-import json from './output.json';
-import {gettingDist} from './str_comp.js';
+import json from './output.json'; // converted csv file
 import Fuse from 'fuse.js';
 
+// Creating a new dataset with a "Full Name" key in order to consider
+// first and last names together as well as individually in Fuse. 
 const adjustedData = json.map(item => ({
     ...item,
     fullName: `${item["First Name"]} ${item["Last Name"]}`
 }))
 
+// Customization to optimize the Fuse results for our purposes. Strategies
+// explained in README
 const options = {
-    includeScore: true,
-    threshold: 0.4, // wondering how low to put this
+    threshold: 0.4, 
     keys: [ "fullName", "First Name", "Last Name" ], 
     fieldNormWeight:2,
     distance: 50,
-    matchAllTokens: true
+    matchAllTokens: false
 }
 
 const fuse = new Fuse(adjustedData, options);
@@ -23,7 +25,6 @@ const fuse = new Fuse(adjustedData, options);
 export default function App() {
     const [searchQuery, setSearchQuery] = useState("");
     const [displayedData, setDisplayedData] = useState(json);
-    //const searchableKeys = ['First Name', 'Last Name'];
 
     // Fuzzy match using a common, lightweight fuzzy-search library. 
     // Optimized for the given database. 
@@ -36,33 +37,6 @@ export default function App() {
             visibleResults = result.slice(0,fraction);
         }
         setDisplayedData(visibleResults.map(({ item }) => item));
-    }
-
-    const handleSearchMine = (query) => {
-        setSearchQuery(query);
-        const formattedQuery = query.toLowerCase();
-        const filteredData = json
-            .filter((item) => {
-                return gettingMatch(item, formattedQuery);
-            })
-            .map(item => {
-                const full_name = item['First Name'].concat(" ", item['Last Name']);
-                return {
-                    ...item,
-                    distance: (gettingDist(full_name, formattedQuery))
-                    //distance: gettingDist(item['First Name'].concat(" ", item['Last Name']), query)
-                };
-            })
-            .sort((a,b) => a.distance - b.distance);
-        setDisplayedData(filteredData);
-    }
-
-    const gettingMatch = (item, query) => {
-        const full_name = item['First Name'].concat(" ", item['Last Name']);
-        const lev_dist = gettingDist(full_name, query);
-        //return lev_dist <= 6;
-        return lev_dist <= Math.max(query.length, full_name.length) * 0.9;
-        // issue is that first and last names, shorter ones are showing up bc 
     }
 
   // Simple front end setup, with a dynamic FlatList for the search results.
@@ -79,11 +53,10 @@ export default function App() {
           onChangeText={handleSearchFuse}
         />
 
-        <FlatList 
+        <FlatList
             data={displayedData}
             scrollEnabled={true}
-            keyExtractor={(item) => item["Customer Id"]} // unique key we can use from the dataset
-            //extraData={selectedId}
+            keyExtractor={(item) => item["Customer Id"]}
             renderItem={({item}) => (
                 <View style={styles.itemContainer}>
                     <Text style={styles.textName}>{item["First Name"]} {item["Last Name"]}</Text>
@@ -95,6 +68,7 @@ export default function App() {
   );
 }
 
+// Common styles to render the front end. 
 const styles = StyleSheet.create({
   searchBox: {
     paddingHorizontal:20,
