@@ -32,7 +32,7 @@ Alternatively, you can clone the repo and run npm start to get the QR code.
 
 ## __Working Log__
 
-## 4/12 
+### *4/12*
 ### *Complete*: 
 * planned approach: basic design, algorithm plan, order of approach, priorities
 * wrote distance algorithm for two strings (for fuzzy matching, in case I was writing my own)
@@ -46,7 +46,7 @@ Alternatively, you can clone the repo and run npm start to get the QR code.
 * enable scroll on the names that appear
 * test and compare against known fuzzy matching searches
 
-## 4/13
+### *4/13*
 ### *Complete*: 
 * replaced gettingMatch with the Fuse.js library tool. 
 * enabled scroll, added mapping and sort personal algorithm to order the results by relevance.
@@ -56,7 +56,7 @@ Alternatively, you can clone the repo and run npm start to get the QR code.
 * add click option (highlight the name that has been clicked)
 * export and instructions to run
 
-## 4/14
+### *4/14*
 ### *Complete*: 
 * Fuse optimization: threshold testing, json modifications, documentation research 
 * Wrote writeup, logged potential improvements
@@ -64,6 +64,6 @@ Alternatively, you can clone the repo and run npm start to get the QR code.
 ### *To Do*:
 * export and test
 
-## 4/15 
+### *4/15*
 ### *Complete*: 
-* Final export and code cleanup.
+* Final export, instructions, and code cleanup.
