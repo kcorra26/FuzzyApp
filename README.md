@@ -3,7 +3,7 @@
 
 *Assignment*: Given the 1000 entries in the attached data set, do fuzzy matching filtering when a user starts typing a name in the search field in a react native app.
 
-Main configuration written in `App.js`. 
+The main configuration for the app was written in `App.js`. 
 
 ### *Efficiency*: 
 With the default Fuse implementation, the search was slow. `Fuse.js` is used on much larger datasets, so I knew there were ways to optimize the search in order to it to improve. Here's how I made the search faster:
@@ -29,6 +29,7 @@ To run the FuzzyMatch App on your computer, there are two options:
 and run `$ npm start`. When prompted to select a view, press i for iOS. Then wait for it to build and use the app from the simulator. 
 2) Expo Go: This app was built with Expo Go. To view the project, download the Expo Go app from the App Store, create a free account. Then (with the Camera App) scan the QR code below: 
 
+![image](https://github.com/kcorra26/FuzzyApp/assets/114637035/4a7adc13-ee4d-463d-baf1-78ad0d91cf62)
 
 Alternatively, you can clone the repo and run npm start to get the QR code. 
 
