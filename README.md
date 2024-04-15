@@ -21,7 +21,7 @@ I had a limited amount of time to complete the project. If I had longer to work 
 * Optimize search when first and last names are out of order (ex. Li Ryan, Goodman Andrew). There is no specific Fuse documentation that helps with this (`matchAllTokens: false` should help, but it was not entirely successful), but I could build my own as an addition to the library. 
 * Implement explicit exact matching rules. Sometimes multiple names will return, even when the match is exact for only one of them. I could add a constraint that limits the result to one entry if a search matches just one value. 
 * Experiment with alternative matching libraries and run a script to compare the runtimes of one query. 
-* Improve the user interface: adding clickability, loading screen, etc. Front end development was not the focus of the assignment, but with more time I would explore ways for seamless user interaction.  
+* Improve the user interface: adding clickability, loading screen, etc. Front end development was not the focus of the assignment, but with more time I would explore ways for seamless user interaction. 
 
 ## __How To Run__
 To run the FuzzyMatch App on your computer, there are two options: 
