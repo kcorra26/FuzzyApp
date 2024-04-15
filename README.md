@@ -1,6 +1,7 @@
 # Fuzzy Matching App with React Native
-__Overview__
-Assignment: Given the 1000 entries in the attached data set, do fuzzy matching filtering when a user starts typing a name in the search field in a react native app.
+## __Overview__
+
+*Assignment*: Given the 1000 entries in the attached data set, do fuzzy matching filtering when a user starts typing a name in the search field in a react native app.
 
 ### *Efficiency*: 
 With the default Fuse implementation, the search was slow. Fuse.js is used on much larger datasets, so I knew there were ways to optimize the search in order to it to improve. Here's how I made the search faster:
@@ -10,7 +11,7 @@ With the default Fuse implementation, the search was slow. Fuse.js is used on mu
 ### *Optimization*:
 While Fuse.js is a functional fuzzy matching program, it left significant work to be done to optimize the search for the purpose of the assignment. Here's how I made the results better for our purposes:  
 * The search was failing to rank exact matches (first and last name), and I found it was a result of the separation of the first and last name keys in the json file. To ensure that full names were identified properly, I created a modified json file with a "Full Name" key and passed that to the fuzzy matching algorithm instead. There were significant improvements.
-* fieldNormWeight: 
+* fieldNormWeight: Because a lot of first and last names are short (ex. Ryan Li), I wanted to ensure that matching these names were prioritized when the search query is short. The default fieldNormWeight is 1, so I increased it to 2 and found that the search improved as a result. Searching longer words (like Linda) will filter out the shorter names and ensure that the more likely matches appear first. 
 
 ### *Further Steps*
 I had a limited amount of time to complete the project. If I had longer to work on it, I would: 
@@ -20,13 +21,16 @@ I had a limited amount of time to complete the project. If I had longer to work 
 * Experiment with alternative matching libraries and run a script to compare the runtimes of one query. 
 * Improve the user interface: adding clickability, loading screen, etc. Front end development was not the focus of the assignment, but with more time I would explore ways for seamless user interaction.  
 
-__How To Run__
+## __How To Run__
 To run the FuzzyMatch App on your computer, there are two options: 
 1) If an iOS simulator from XCode is installed on your device, clone the git repository in your terminal 
 and run npm start. When prompted to select a view, press i for iOS. Then wait for it to build and use the app from the simulator. 
-2) Expo Go: This app was built with Expo Go. To 
+2) Expo Go: This app was built with Expo Go. To view the project, download the Expo Go app from the App Store, create a free account. Then (with the Camera App) scan the QR code below: 
 
-__Working Log__
+
+Alternatively, you can clone the repo and run npm start to get the QR code. 
+
+## __Working Log__
 
 ## 4/12 
 ### *Complete*: 

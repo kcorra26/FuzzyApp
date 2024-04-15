@@ -1,6 +1,8 @@
-export function gettingDist(a,b) {
+// Basic implementation of the Levenstein algorithm as an exercise to
+// understand logic behind fuzzy matching string comparison. Employs 
+// dynamic programming. 
 
-    // initialize matrix
+export function gettingDist(a,b) {
     dp = [];
     
     for (let i = 0; i <= a.length; i++) {
@@ -20,8 +22,4 @@ export function gettingDist(a,b) {
         }
     }
     return dp[a.length][b.length];
-    // console.log(`final dif between ${a} and ${b} is ${dp[a.length][b.length]}`);
 }
-
-// gettingDist('party', 'pastry');
-// gettingDist('sitting', 'sittin');

@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "FuzzyApp",
-    "slug": "FuzzyApp",
+    "slug": "fuzzymatch",
     "privacy": "public",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kcorra.fuzzymatch"
     },
     "android": {
       "adaptiveIcon": {
@@ -26,6 +27,18 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "faa1cad2-2b96-488a-a5bc-d9a3f8ca8233"
+      }
+    },
+    "owner": "kcorra",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/faa1cad2-2b96-488a-a5bc-d9a3f8ca8233"
     }
   }
 }
